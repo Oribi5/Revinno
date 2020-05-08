@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Revinno</title>
+
+  <!-- Add Styling -->
+  <link rel="icon" href="./assets/rev-icon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/loading.css">
+  <link rel="stylesheet" href="./css/master.css">
+
+  <!-- Add Libraries -->
+  <script src="https://kit.fontawesome.com/b99e675b6e.js" charset="utf-8"></script>
+  <script src="./js/lib/p5.js" charset="utf-8"></script>
+  <script src="./js/lib/Chart.js" charset="utf-8"></script>
+  <script src="./js/lib/jQuery.js" charset="utf-8"></script>
+
+  <!-- Add General Files -->
+
+  <script src="./js/firebase/firebase.js" charset="utf-8"></script>
+  <script src="./js/firebase/md5.js" charset="utf-8"></script>
+  <script src="./js/general.js" charset="utf-8"></script>
+  <script src="./js/main.js" charset="utf-8"></script>
+
+  <script src="./js/data-structures/data-constants.js" charset="utf-8"></script>
+  <script src="./js/data-structures/user-details.js" charset="utf-8"></script>
+  <script src="./js/data-structures/page.js" charset="utf-8"></script>
+
+
+
+
+
+  <!-- Add Page Files -->
+
+
+
+
+  <script src="./pages/design/preliminary-design/preliminary-design.js" charset="utf-8"></script>
+  <script src="./pages/monitor-status/iot-connections/iot-connections.js" charset="utf-8"></script>
+
+
+
+</head>
+<body>
+
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-database.js"></script>
+
+  <script type="text/javascript">
+    var hash = window.location.hash.replace("#", "");
+    var username = formatString(hash);
+    console.log(username);
+
+    var dbs;
+    dbs = new Firebase();
+    dbs.connect();
+
+    dbs.get(`user-status`, function (d) {
+
+      let rootRef = window.location.href.split("/")[0]
+
+      if ( d[hash] == null ) {
+        window.location.href = `${rootRef}/login/`;
+        return;
+      } else if ( !d[hash]["login-status"] || Date.now() > d[hash]["latest-ping"] + 100*60*15 ) {
+        window.location.href = `${rootRef}/login/`;
+        return;
+      }
+
+      dbs.initPing();
+
+    });
+
+  </script>
+
+  <div class="main-page">
+    <div class="navbar">
+      <a class="logo" href="javascript:console.log('logo')"><h1>Revinno</h1></a>
+      <div class="page-title">
+        <div class="breadcrumbs">
+          <h3>Design <i class="fas fa-arrow-right"></i> Preliminary Design</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-bar">
+      <ul class="side-bar-menu">
+        <li class="side-bar-heading">Design</li>
+
+        <a type="design|preliminary-design" onclick="updatePage(this)"><li class="active">
+          <i class="fas fa-pen"></i><span>Preliminary Design</span>
+        </li></a>
+
+        <a type="design|logistics" onclick="updatePage(this)"><li>
+          <i class="fas fa-pencil-ruler"></i><span>Logistics</span>
+        </li></a>
+
+        <li class="side-bar-heading">Monitor Status</li>
+
+        <a type="monitor-status|iot-connections" onclick="updatePage(this)"><li>
+          <i class="fas fa-wifi"></i><span>IOT Connections</span>
+        </li></a>
+
+        <a type="monitor-status|order-status" onclick="updatePage(this)"><li>
+          <i class="fas fa-cube"></i></i><span>Order Status</span>
+        </li></a>
+
+        <a type="monitor-status|live-feed" onclick="updatePage(this)"><li>
+          <i class="fas fa-desktop"></i><span>Live Feed</span>
+        </li></a>
+
+        <a type="monitor-status|3D-reconstruction" onclick="updatePage(this)"><li>
+          <i class="fas fa-cubes"></i><span>3D Reconstruction</span>
+        </li></a>
+
+        <li class="side-bar-heading">Report Generation</li>
+
+        <a type="report-generation|production-dashbaord" onclick="updatePage(this)"><li>
+          <i class="fas fa-file-alt"></i></i><span>Production Dashboard</span>
+        </li></a>
+
+        <a type="report-generation|3D-analysis" onclick="updatePage(this)"><li>
+          <i class="fas fa-cube"></i><span>3D Analysis</span>
+        </li></a>
+      </ul>
+    </div>
+
+    <div class="content">
+      <div class="content-container">
+
+        <div id="page-container"></div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="loading-page" style="display: none">
+    <img src="./assets/logo-inverted.png" alt="logo">
+    <div class="loading-animation" style="transition: 2s;">
+      <h1 class="loading-text-1">Revolution</h1>
+      <h1 class="loading-text-2">Innovation</h1>
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div class="welcome-page" style="opacity: 0; transition: 1.5s;">
+      <h1 style="font-size: 40px; text-align: center;">Welcome</h1>
+    </div>
+    <h1></h1>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+<footer>
+  <!-- <script src="./js/test.js" charset="utf-8"></script> -->
+</footer>
+
+</html>

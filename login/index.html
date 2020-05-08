@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Revinno</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="../js/lib/jQuery.js" charset="utf-8"></script>
+    <script src="../js/firebase/md5.js" charset="utf-8"></script>
+
+    <script src="../js/firebase/firebase.js" charset="utf-8"></script>
+    <script src="./main.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+      <div class="login-form-container">
+        <form action="#error" id="login-form" class="login-form">
+          <h1>Login</h1>
+
+          <p>Incorrect Username or Password</p>
+
+          <div class="txtb">
+            <input id="username" type="text">
+            <span data-placeholder="Username"></span>
+          </div>
+
+          <div class="txtb">
+            <input id="password" type="password">
+            <span data-placeholder="Password"></span>
+          </div>
+
+          <input type="submit" class="logbtn" value="Login">
+
+        </form>
+      </div>
+
+
+      <script type="text/javascript">
+        $textInput = $(".txtb input");
+        $textInput.on("focus",function(){
+          $(this).addClass("focus");
+        });
+
+        $textInput.on("blur",function(){
+          if($(this).val() == "")
+          $(this).removeClass("focus");
+        });
+
+        //Add this here to ensure login form does not continue
+        let el = document.getElementById('login-form');
+        el.addEventListener('submit', function(e){
+          e.preventDefault();
+            // return true;
+        }, true);
+      </script>
+
+      <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+      <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+
+      <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+      <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
+      <!-- Add Firebase products that you want to use -->
+      <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-database.js"></script>
+
+
+  </body>
+</html>

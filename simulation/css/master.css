@@ -1,0 +1,149 @@
+* {
+  color: white;
+}
+
+
+body {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+input {
+  background-color: rgba(0,0,0,0);
+  border: none;
+  overflow: auto;
+  outline: none;
+
+}
+
+i {
+  line-height: 18px;
+  font-size: 10px !important;
+}
+
+.command-container {
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  background-color: rgba(100,100,100,0.2);
+}
+
+.command-prompt-container {
+
+  position: relative;
+  left: 20px;
+  top: 20px;
+  width: calc(100% - 40px);
+  height: 70%;
+  /* background-color: rgba(0,0,0); */
+}
+
+.command-input-space {
+  position: relative;
+  height: 80%;
+  width: 80%;
+  overflow: auto;
+}
+
+.command-container-active {
+  width: 400px;
+}
+
+.command-line {
+  overflow: visible;
+  display: block;
+  font-family: monospace;
+  position: relative;
+  width: 100%;
+}
+
+.command-line .command-prefix {
+  position: absolute;
+  line-height: 18px;
+  font-size: 10px !important;
+}
+
+.command-line .command-input {
+  position: absolute;
+  font-family: monospace;
+  left: 20px;
+  height: 14px;
+  width: 90%;
+}
+
+.command-line.spacer {
+  height: 18px;
+}
+
+.command-line.indent-1 {
+  padding-left: 10px;
+  width: calc(100% - 10px);
+}
+
+.command-line.indent-2 {
+  padding-left: 20px;
+  width: calc(100% - 20px);
+}
+
+.command-line.indent-3 {
+  padding-left: 30px;
+  width: calc(100% - 30px);
+}
+
+.command-line.indent-4 {
+  padding-left: 40px;
+  width: calc(100% - 40px);
+}
+
+.command-line.indent-5 {
+  padding-left: 50px;
+  width: calc(100% - 50px);
+}
+
+.command-line.indent-6 {
+  padding-left: 60px;
+  width: calc(100% - 60px);
+}
+
+.command-line.error {
+  color: red;
+}
+
+.simulation-container {
+  position: absolute;
+  left: 400px;
+  width: calc(100% - 400px);
+  height: 100%;
+  background-color: none;
+}
+
+#p5-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #004e92;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #002c53;
+}
+
+::-webkit-scrollbar-corner { background: rgba(0,0,0,0); }
